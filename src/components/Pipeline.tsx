@@ -6,10 +6,6 @@ import PhoneMockup from './ui/PhoneMockup'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Each step gets ~180px of scroll. Section height = 100vh + (steps * 180px)
-// so GSAP and the container are always in sync.
-const SCROLL_PER_STEP = 180
-
 const pipelineSteps = [
   {
     step: '01',
@@ -43,21 +39,29 @@ const pipelineSteps = [
   },
 ]
 
-const TOTAL_SCROLL_PX = pipelineSteps.length * SCROLL_PER_STEP
-
 export default function Pipeline() {
   const containerRef = useRef<HTMLDivElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
   const [activeStep, setActiveStep] = useState(0)
+  // Section height is calculated from window.innerHeight so scroll per step
+  // is always proportional to the screen — consistent on every device.
+  const [sectionHeight, setSectionHeight] = useState('600vh')
 
   useEffect(() => {
+    // 60% of viewport per step — enough to feel intentional but not tedious
+    const scrollPerStep = window.innerHeight * 0.6
+    const totalScrollPx = pipelineSteps.length * scrollPerStep
+    setSectionHeight(`calc(100vh + ${totalScrollPx}px)`)
+
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        end: `+=${TOTAL_SCROLL_PX}`,
+        end: `+=${totalScrollPx}`,
         pin: stickyRef.current,
-        scrub: 0.6,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const step = Math.min(
             Math.floor(self.progress * pipelineSteps.length),
@@ -68,15 +72,20 @@ export default function Pipeline() {
       })
     }, containerRef)
 
-    return () => ctx.revert()
+    // Force recalculation after fonts/images load and layout settles
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 300)
+
+    return () => {
+      clearTimeout(timer)
+      ctx.revert()
+    }
   }, [])
 
   return (
-    // Height = one screen (for the pinned view) + exact scroll distance GSAP uses
     <section
       id="pipeline"
       ref={containerRef}
-      style={{ height: `calc(100vh + ${TOTAL_SCROLL_PX}px)` }}
+      style={{ height: sectionHeight }}
     >
       <div
         ref={stickyRef}
