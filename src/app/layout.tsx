@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
   title: 'WhatsApp AI Lead Automation | SynOps Labs',
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-bg text-primary antialiased">{children}</body>
+      <body className="bg-bg text-primary antialiased">
+        <Analytics />
+        {children}
+      </body>
     </html>
   )
 }
