@@ -125,29 +125,42 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT: Spline 3D scene */}
+        {/* RIGHT: Spline 3D scene — bleeds to viewport edge, seamlessly faded */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="relative hidden lg:flex items-center justify-center"
-          style={{ height: '600px' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative hidden lg:block"
+          style={{ height: '680px', marginRight: 'calc(-50vw + 50%)' }}
         >
-          {/* Clip the Spline canvas to this column — hides any template UI overflow */}
-          <div
-            className="absolute inset-0 overflow-hidden rounded-2xl"
-            style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)' }}
-          >
+          {/* Raw Spline canvas — no border, no rounding */}
+          <div className="absolute inset-0 overflow-hidden">
             <Spline
               scene={SPLINE_SCENE}
               style={{ width: '100%', height: '100%' }}
             />
           </div>
 
-          {/* Right-edge fade so scene blends with page background */}
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg to-transparent pointer-events-none" />
-          {/* Left-edge fade */}
-          <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-bg to-transparent pointer-events-none" />
+          {/* Fade: left edge — blends into copy column */}
+          <div
+            className="absolute inset-y-0 left-0 w-48 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }}
+          />
+          {/* Fade: right edge */}
+          <div
+            className="absolute inset-y-0 right-0 w-32 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }}
+          />
+          {/* Fade: top edge */}
+          <div
+            className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }}
+          />
+          {/* Fade: bottom edge — also covers "Built with Spline" watermark */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+            style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }}
+          />
         </motion.div>
 
       </div>
