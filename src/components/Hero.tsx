@@ -1,8 +1,14 @@
 'use client'
 import { motion } from 'framer-motion'
-import GradientMesh from './ui/GradientMesh'
+import dynamic from 'next/dynamic'
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full" />,
+})
 
 const CALENDLY_URL = 'CALENDLY_PLACEHOLDER'
+const SPLINE_SCENE = 'https://prod.spline.design/MLoQYMntqoS3loso/scene.splinecode'
 
 const floatingCards = [
   { label: '🔥 Hot Lead', sub: 'Aliya R. — Budget: AED 15K', color: 'border-gold/30 bg-gold/5', delay: 0 },
@@ -13,9 +19,32 @@ const floatingCards = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <GradientMesh />
 
+      {/* Spline — full background layer, pointer-events disabled so it doesn't block clicks */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Spline scene={SPLINE_SCENE} className="w-full h-full" />
+        {/* Darken so the 3D doesn't overpower the text */}
+        <div className="absolute inset-0 bg-bg/60" />
+        {/* Fade bottom into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-bg to-transparent" />
+      </div>
+
+      {/* Grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Cyan glow — top left */}
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-cyan/8 blur-[120px] pointer-events-none" />
+
+      {/* Content — identical to original layout */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center py-20">
+
         {/* Left: copy */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -50,7 +79,7 @@ export default function Hero() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full bg-cyan text-bg font-bold text-base hover:bg-cyan-dark transition-all hover:scale-105 text-center"
+              className="px-8 py-4 rounded-full bg-cyan text-bg font-bold text-base hover:bg-cyan-dark transition-all hover:scale-105 text-center shadow-lg shadow-cyan/20"
             >
               Book a Free 15-Min Call
             </a>

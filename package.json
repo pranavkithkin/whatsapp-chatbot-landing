@@ -11,6 +11,8 @@
     "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.12.58",
     "@types/three": "^0.183.1",
     "framer-motion": "^12.34.3",
     "gsap": "^3.14.2",
