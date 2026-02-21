@@ -2,9 +2,11 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
-const CALENDLY_URL = 'CALENDLY_PLACEHOLDER'
+interface Props {
+  onBookCall: () => void
+}
 
-export default function FinalCTA() {
+export default function FinalCTA({ onBookCall }: Props) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -30,14 +32,12 @@ export default function FinalCTA() {
           15 minutes. We&apos;ll show you exactly how the system works for your business.
           No commitment. No pitch deck. Just a real conversation.
         </p>
-        <a
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={onBookCall}
           className="inline-block px-10 py-5 rounded-full bg-cyan text-bg font-bold text-lg hover:bg-cyan-dark transition-all hover:scale-105 shadow-lg shadow-cyan/20"
         >
           Book Your Free 15-Min Call →
-        </a>
+        </button>
         <p className="mt-6 text-muted text-sm">
           UAE-based • Founder-led delivery • Live in 2 weeks
         </p>
