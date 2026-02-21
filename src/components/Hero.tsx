@@ -57,11 +57,12 @@ export default function Hero({ onBookCall }: Props) {
             left: '-10%',
             width: '120%',
             height: '120%',
+            pointerEvents: 'none',
           }}
         >
           <Spline
             scene={SPLINE_SCENE}
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', pointerEvents: 'none' }}
           />
         </div>
 
@@ -85,7 +86,7 @@ export default function Hero({ onBookCall }: Props) {
       </motion.div>
 
       {/* ── Left: copy — sits above Spline via z-10 ── */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 py-20">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 py-20 pointer-events-auto">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
