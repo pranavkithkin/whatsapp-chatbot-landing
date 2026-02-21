@@ -33,7 +33,7 @@ export default function Problem() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-cyan font-mono text-sm font-medium mb-3 uppercase tracking-widest">The Problem</p>
+          <p className="text-cyan font-mono text-base font-medium mb-3 uppercase tracking-widest">The Problem</p>
           <h2 className="text-4xl lg:text-5xl font-black tracking-tight">
             Meta Ads Bring the Leads.
             <br />
@@ -51,8 +51,8 @@ export default function Problem() {
               className="p-6 rounded-2xl border border-white/5 bg-surface hover:border-white/10 transition-colors"
             >
               <span className="text-4xl mb-4 block">{pain.icon}</span>
-              <h3 className="text-lg font-bold mb-2">{pain.title}</h3>
-              <p className="text-muted text-sm leading-relaxed">{pain.body}</p>
+              <h3 className="text-2xl font-bold mb-3">{pain.title}</h3>
+              <p className="text-muted text-lg leading-relaxed">{pain.body}</p>
             </motion.div>
           ))}
         </div>

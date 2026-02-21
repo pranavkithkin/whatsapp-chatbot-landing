@@ -30,7 +30,7 @@ export default function Navbar() {
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-5 py-2 rounded-full bg-cyan text-bg font-semibold text-sm hover:bg-cyan-dark transition-colors"
+          className="px-5 py-2.5 rounded-full bg-cyan text-bg font-semibold text-base hover:bg-cyan-dark transition-colors"
         >
           Book a Call
         </a>

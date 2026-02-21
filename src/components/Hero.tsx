@@ -40,17 +40,17 @@ export default function Hero() {
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan/25 bg-cyan/5 text-cyan text-[11px] font-mono font-medium mb-7 tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/25 bg-cyan/5 text-cyan text-[13px] font-mono font-medium mb-7 tracking-widest uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
             AI-Powered · 24 / 7 · 2-Week Setup
           </div>
 
           {/* Headline */}
           <h1 className="font-black leading-[1.02] tracking-tight mb-6">
-            <span className="block text-5xl lg:text-[60px] text-primary">Your Meta Ads</span>
-            <span className="block text-5xl lg:text-[60px] text-primary">Are Working.</span>
+            <span className="block text-5xl lg:text-[64px] text-primary">Your Meta Ads</span>
+            <span className="block text-5xl lg:text-[64px] text-primary">Are Working.</span>
             <span
-              className="block text-5xl lg:text-[60px]"
+              className="block text-5xl lg:text-[64px]"
               style={{
                 backgroundImage: 'linear-gradient(135deg, #22D3EE 0%, #0891B2 100%)',
                 WebkitBackgroundClip: 'text',
@@ -61,7 +61,7 @@ export default function Hero() {
               Your WhatsApp
             </span>
             <span
-              className="block text-5xl lg:text-[60px]"
+              className="block text-5xl lg:text-[64px]"
               style={{
                 backgroundImage: 'linear-gradient(135deg, #22D3EE 0%, #0891B2 100%)',
                 WebkitBackgroundClip: 'text',
@@ -74,7 +74,7 @@ export default function Hero() {
           </h1>
 
           {/* Body */}
-          <p className="text-[17px] text-muted leading-[1.7] mb-9 max-w-[440px]">
+          <p className="text-[19px] text-muted leading-[1.7] mb-9 max-w-[440px]">
             Every lead that messages you deserves an instant reply.
             Our AI responds in seconds, qualifies automatically,
             and only pings your team when a deal is ready to close.
@@ -88,7 +88,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-4 rounded-full font-bold text-[15px] text-bg text-center"
+              className="px-8 py-4 rounded-full font-bold text-[16px] text-bg text-center"
               style={{
                 background: 'linear-gradient(135deg, #22D3EE, #0891B2)',
                 boxShadow: '0 0 32px rgba(34,211,238,0.25)',
@@ -98,7 +98,7 @@ export default function Hero() {
             </motion.a>
             <a
               href="#pipeline"
-              className="px-8 py-4 rounded-full border border-white/10 text-primary font-medium text-[15px] hover:border-cyan/30 hover:text-cyan transition-all text-center"
+              className="px-8 py-4 rounded-full border border-white/10 text-primary font-medium text-[16px] hover:border-cyan/30 hover:text-cyan transition-all text-center"
             >
               See How It Works ↓
             </a>
@@ -116,12 +116,12 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
               </span>
-              <span className="text-xs text-muted">Live in UAE</span>
+              <span className="text-sm text-muted">Live in UAE</span>
             </div>
             <div className="w-px h-3 bg-white/10" />
-            <span className="text-xs text-muted">259+ leads / week automated</span>
+            <span className="text-sm text-muted">259+ leads / week automated</span>
             <div className="w-px h-3 bg-white/10" />
-            <span className="text-xs text-muted">Go live in 2 weeks</span>
+            <span className="text-sm text-muted">Go live in 2 weeks</span>
           </motion.div>
         </motion.div>
 

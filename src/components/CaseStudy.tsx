@@ -42,7 +42,7 @@ export default function CaseStudy() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="text-cyan font-mono text-sm font-medium uppercase tracking-widest mb-3">Case Study</p>
+          <p className="text-cyan font-mono text-lg font-medium uppercase tracking-widest mb-3">Case Study</p>
           <h2 className="text-4xl lg:text-5xl font-black tracking-tight mb-6">
             From 4 Staff Drowning in Chats
             <br />
@@ -50,7 +50,7 @@ export default function CaseStudy() {
               to Zero Missed Leads.
             </span>
           </h2>
-          <p className="text-muted text-lg max-w-2xl leading-relaxed">
+          <p className="text-muted text-xl max-w-2xl leading-relaxed">
             A UAE-based business setup company was running aggressive Meta ad campaigns —
             and it was working. Too well. 259 leads a week were hitting their WhatsApp.
             Four staff members could barely keep up. Hot buyers were going cold while the
@@ -65,8 +65,8 @@ export default function CaseStudy() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="p-6 rounded-2xl border border-gold/20 bg-gold/5 mb-12"
         >
-          <p className="text-gold font-mono text-xs font-medium uppercase tracking-widest mb-2">The Breaking Point</p>
-          <p className="text-primary text-lg font-medium leading-relaxed">
+          <p className="text-gold font-mono text-base font-medium uppercase tracking-widest mb-2">The Breaking Point</p>
+          <p className="text-primary text-xl font-medium leading-relaxed">
             &ldquo;We knew we were losing deals. A lead would message us at 9pm, we&apos;d reply the next morning —
             and they&apos;d already signed with someone else. We couldn&apos;t hire our way out of this.&rdquo;
           </p>
@@ -82,13 +82,13 @@ export default function CaseStudy() {
               transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
               className={`p-6 rounded-2xl border ${phase.color}`}
             >
-              <p className={`font-mono text-sm font-bold uppercase tracking-widest mb-4 ${phase.labelColor}`}>
+              <p className={`font-mono text-lg font-bold uppercase tracking-widest mb-4 ${phase.labelColor}`}>
                 {phase.phase}
               </p>
               <ul className="space-y-3">
                 {phase.items.map((item, j) => (
-                  <li key={j} className="flex gap-3 text-sm text-muted">
-                    <span className={`mt-0.5 shrink-0 ${i === 0 ? 'text-red-400' : 'text-cyan'}`}>
+                  <li key={j} className="flex gap-3 text-lg text-muted leading-relaxed">
+                    <span className={`mt-1 shrink-0 ${i === 0 ? 'text-red-400' : 'text-cyan'}`}>
                       {i === 0 ? '✗' : '✓'}
                     </span>
                     {item}
@@ -114,7 +114,7 @@ export default function CaseStudy() {
           ].map((item, i) => (
             <div key={i} className="p-4 rounded-xl border border-white/5 bg-surface text-center">
               <p className="text-3xl font-black font-mono text-cyan mb-1">{item.n}</p>
-              <p className="text-xs text-muted">{item.label}</p>
+              <p className="text-base text-muted">{item.label}</p>
             </div>
           ))}
         </motion.div>

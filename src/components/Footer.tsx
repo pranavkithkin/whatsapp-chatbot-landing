@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t border-white/5 py-8 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
         <p>© 2025 SynOps Labs. All rights reserved.</p>
         <div className="flex gap-6">
           <a href="mailto:pranav@synopslabs.com" className="hover:text-primary transition-colors">

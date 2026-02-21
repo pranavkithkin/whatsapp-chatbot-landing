@@ -100,7 +100,7 @@ export default function Pipeline() {
           {/* Left: steps */}
           <div className="space-y-5">
             <div className="mb-8">
-              <p className="text-cyan font-mono text-sm font-medium uppercase tracking-widest mb-3">How It Works</p>
+              <p className="text-cyan font-mono text-base font-medium uppercase tracking-widest mb-3">How It Works</p>
               <h2 className="text-4xl font-black tracking-tight">The WhatsApp Pipeline</h2>
             </div>
             {pipelineSteps.map((s, i) => (
@@ -110,15 +110,15 @@ export default function Pipeline() {
                   i === activeStep ? 'opacity-100' : i < activeStep ? 'opacity-35' : 'opacity-15'
                 }`}
               >
-                <span className={`font-mono text-sm font-bold w-8 shrink-0 mt-0.5 ${
+                <span className={`font-mono text-base font-bold w-8 shrink-0 mt-0.5 ${
                   i === activeStep ? 'text-cyan' : 'text-muted'
                 }`}>{s.step}</span>
                 <div>
-                  <h3 className={`font-bold text-sm mb-1 ${i === activeStep ? 'text-primary' : 'text-muted'}`}>
+                  <h3 className={`font-bold text-base mb-1 ${i === activeStep ? 'text-primary' : 'text-muted'}`}>
                     {s.title}
                   </h3>
                   {i === activeStep && (
-                    <p className="text-muted text-xs leading-relaxed">{s.body}</p>
+                    <p className="text-muted text-sm leading-relaxed">{s.body}</p>
                   )}
                 </div>
               </div>
