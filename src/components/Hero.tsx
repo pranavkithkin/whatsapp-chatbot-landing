@@ -30,7 +30,7 @@ export default function Hero({ onBookCall }: Props) {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" />
 
       {/* ── Two-column layout ─────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-8 items-center py-20">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 grid lg:grid-cols-[55%_45%] gap-8 items-center py-20">
 
         {/* LEFT: copy */}
         <motion.div
@@ -127,19 +127,17 @@ export default function Hero({ onBookCall }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative hidden lg:block"
-          style={{ height: '680px', marginRight: 'calc(-50vw + 50%)' }}
+          className="relative hidden lg:flex lg:items-center lg:justify-center overflow-hidden"
+          style={{ height: '680px' }}
         >
-          <div className="absolute inset-0 overflow-hidden">
-            <Spline
-              scene={SPLINE_SCENE}
-              style={{ width: '100%', height: '100%' }}
-            />
-          </div>
-          <div className="absolute inset-y-0 left-0 w-48 pointer-events-none" style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }} />
-          <div className="absolute inset-y-0 right-0 w-32 pointer-events-none" style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }} />
-          <div className="absolute top-0 left-0 right-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }} />
-          <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none" style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }} />
+          <Spline
+            scene={SPLINE_SCENE}
+            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
+          />
+          <div className="absolute inset-y-0 left-0 w-32 pointer-events-none" style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }} />
+          <div className="absolute inset-y-0 right-0 w-24 pointer-events-none" style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }} />
+          <div className="absolute top-0 left-0 right-0 h-24 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }} />
         </motion.div>
 
       </div>
