@@ -2,9 +2,11 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-const CALENDLY_URL = 'CALENDLY_PLACEHOLDER'
+interface Props {
+  onBookCall: () => void
+}
 
-export default function Navbar() {
+export default function Navbar({ onBookCall }: Props) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -26,14 +28,12 @@ export default function Navbar() {
           className="h-9 w-auto object-contain"
           priority
         />
-        <a
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={onBookCall}
           className="px-5 py-2.5 rounded-full bg-cyan text-bg font-semibold text-base hover:bg-cyan-dark transition-colors"
         >
           Book a Call
-        </a>
+        </button>
       </div>
     </nav>
   )

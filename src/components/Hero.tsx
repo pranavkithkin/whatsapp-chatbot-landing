@@ -7,15 +7,17 @@ const Spline = dynamic(() => import('@splinetool/react-spline'), {
   loading: () => <div className="w-full h-full" />,
 })
 
-const CALENDLY_URL = 'CALENDLY_PLACEHOLDER'
 const SPLINE_SCENE = 'https://prod.spline.design/MLoQYMntqoS3loso/scene.splinecode'
 
-export default function Hero() {
+interface Props {
+  onBookCall: () => void
+}
+
+export default function Hero({ onBookCall }: Props) {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
 
       {/* ── Static background effects ─────────────────────────────────────── */}
-      {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -23,11 +25,8 @@ export default function Hero() {
           backgroundSize: '32px 32px',
         }}
       />
-      {/* Cyan glow top-left */}
       <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-cyan/8 blur-[130px] pointer-events-none" />
-      {/* Cyan glow right */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-cyan/5 blur-[120px] pointer-events-none" />
-      {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" />
 
       {/* ── Two-column layout ─────────────────────────────────────────────── */}
@@ -82,10 +81,8 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <motion.a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              onClick={onBookCall}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="px-8 py-4 rounded-full font-bold text-[16px] text-bg text-center"
@@ -95,7 +92,7 @@ export default function Hero() {
               }}
             >
               Book a Free 15-Min Call
-            </motion.a>
+            </motion.button>
             <a
               href="#pipeline"
               className="px-8 py-4 rounded-full border border-white/10 text-primary font-medium text-[16px] hover:border-cyan/30 hover:text-cyan transition-all text-center"
@@ -125,7 +122,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT: Spline 3D scene — bleeds to viewport edge, seamlessly faded */}
+        {/* RIGHT: Spline 3D scene */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -133,34 +130,16 @@ export default function Hero() {
           className="relative hidden lg:block"
           style={{ height: '680px', marginRight: 'calc(-50vw + 50%)' }}
         >
-          {/* Raw Spline canvas — no border, no rounding */}
           <div className="absolute inset-0 overflow-hidden">
             <Spline
               scene={SPLINE_SCENE}
               style={{ width: '100%', height: '100%' }}
             />
           </div>
-
-          {/* Fade: left edge — blends into copy column */}
-          <div
-            className="absolute inset-y-0 left-0 w-48 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }}
-          />
-          {/* Fade: right edge */}
-          <div
-            className="absolute inset-y-0 right-0 w-32 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }}
-          />
-          {/* Fade: top edge */}
-          <div
-            className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
-            style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }}
-          />
-          {/* Fade: bottom edge — also covers "Built with Spline" watermark */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }}
-          />
+          <div className="absolute inset-y-0 left-0 w-48 pointer-events-none" style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }} />
+          <div className="absolute inset-y-0 right-0 w-32 pointer-events-none" style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }} />
+          <div className="absolute top-0 left-0 right-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none" style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }} />
         </motion.div>
 
       </div>
