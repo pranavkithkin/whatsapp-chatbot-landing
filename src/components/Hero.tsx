@@ -35,7 +35,7 @@ export default function Hero({ onBookCall }: Props) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute hidden lg:block pointer-events-none"
+        className="absolute hidden lg:block"
         style={{
           top: 0,
           right: 0,
@@ -57,12 +57,11 @@ export default function Hero({ onBookCall }: Props) {
             left: '-10%',
             width: '120%',
             height: '120%',
-            pointerEvents: 'none',
           }}
         >
           <Spline
             scene={SPLINE_SCENE}
-            style={{ width: '100%', height: '100%', pointerEvents: 'none' }}
+            style={{ width: '100%', height: '100%' }}
           />
         </div>
 
@@ -86,12 +85,13 @@ export default function Hero({ onBookCall }: Props) {
       </motion.div>
 
       {/* ── Left: copy — sits above Spline via z-10 ── */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 py-20 pointer-events-auto">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 py-20" style={{ pointerEvents: 'none' }}>
+        {/* Re-enable pointer events only on the copy column */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[600px]"
+          className="max-w-[600px]" style={{ pointerEvents: 'auto' }}
         >
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/25 bg-cyan/5 text-cyan text-[13px] font-mono font-medium mb-7 tracking-widest uppercase">
