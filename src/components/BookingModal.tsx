@@ -20,6 +20,19 @@ type Step = 'form' | 'slots' | 'success'
 
 const DAYS_AHEAD = 7
 
+// Parse time directly from ISO string (e.g. "2026-02-25T13:00:00+05:30") to avoid
+// timezone conversion — the time in the string IS the IST time we want to display.
+function formatISTTime(isoSlot: string): string {
+  const timePart = isoSlot.substring(11, 16) // "13:00"
+  const [hStr, mStr] = timePart.split(':')
+  let h = parseInt(hStr, 10)
+  const m = mStr
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  if (h > 12) h -= 12
+  if (h === 0) h = 12
+  return `${h}:${m} ${ampm}`
+}
+
 export default function BookingModal({ open, onClose }: Props) {
   const [step, setStep] = useState<Step>('form')
   const [formData, setFormData] = useState<FormData>({ name: '', phone: '', email: '', company: '' })
@@ -174,10 +187,10 @@ export default function BookingModal({ open, onClose }: Props) {
               <div className="space-y-4">
                 {(
                   [
-                    { key: 'name', label: 'Full Name', type: 'text', placeholder: 'John Doe' },
-                    { key: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 98765 43210' },
-                    { key: 'email', label: 'Work Email', type: 'email', placeholder: 'john@acme.com' },
-                    { key: 'company', label: 'Company', type: 'text', placeholder: 'Acme Corp' },
+                    { key: 'name', label: 'Full Name', type: 'text', placeholder: 'Your name' },
+                    { key: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+971 50 000 0000' },
+                    { key: 'email', label: 'Work Email', type: 'email', placeholder: 'you@yourcompany.com' },
+                    { key: 'company', label: 'Company', type: 'text', placeholder: 'Your company' },
                   ] as const
                 ).map(({ key, label, type, placeholder }) => (
                   <div key={key}>
@@ -283,7 +296,7 @@ export default function BookingModal({ open, onClose }: Props) {
                 {selectedDate && !slotsLoading && !slotsError && slots.length > 0 && (
                   <div className="grid grid-cols-3 gap-2">
                     {slots.map((slot) => {
-                      const time = format(parseISO(slot), 'h:mm a')
+                      const time = formatISTTime(slot)
                       const isSelected = selectedSlot === slot
                       return (
                         <button
@@ -355,13 +368,13 @@ export default function BookingModal({ open, onClose }: Props) {
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Date</span>
                   <span className="text-slate-200 font-medium">
-                    {bookedSlot ? format(parseISO(bookedSlot), 'EEEE, MMM d') : ''}
+                    {bookedSlot ? format(new Date(bookedSlot.substring(0, 10) + 'T12:00:00'), 'EEEE, MMM d') : ''}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Time</span>
                   <span className="text-slate-200 font-medium">
-                    {bookedSlot ? format(parseISO(bookedSlot), 'h:mm a') : ''} IST
+                    {bookedSlot ? formatISTTime(bookedSlot) : ''} IST
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
@@ -370,20 +383,10 @@ export default function BookingModal({ open, onClose }: Props) {
                 </div>
               </div>
 
-              {/* Meet link */}
-              <a
-                href={meetLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full py-3.5 rounded-xl font-bold text-sm text-[#080C14] mb-3 transition-all hover:scale-[1.02]"
-                style={{ background: 'linear-gradient(135deg, #22D3EE, #0891B2)', boxShadow: '0 0 24px rgba(34,211,238,0.2)' }}
-              >
-                Join Google Meet
-              </a>
-
               <button
                 onClick={downloadICS}
-                className="w-full py-3 rounded-xl border border-white/10 text-sm text-slate-400 hover:border-white/20 hover:text-white transition-all mb-4"
+                className="w-full py-3.5 rounded-xl font-bold text-sm text-[#080C14] mb-4 transition-all hover:scale-[1.02]"
+                style={{ background: 'linear-gradient(135deg, #22D3EE, #0891B2)', boxShadow: '0 0 24px rgba(34,211,238,0.2)' }}
               >
                 Add to Calendar (.ics)
               </button>

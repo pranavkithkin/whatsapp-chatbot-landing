@@ -48,18 +48,18 @@ export default function Pipeline() {
   const [sectionHeight, setSectionHeight] = useState('600vh')
 
   useEffect(() => {
-    // 60% of viewport per step — enough to feel intentional but not tedious
-    const scrollPerStep = window.innerHeight * 0.6
+    // ~7% of viewport per step — roughly 5 scroll ticks on a Logitech wheel
+    const scrollPerStep = window.innerHeight * 0.07
     const totalScrollPx = pipelineSteps.length * scrollPerStep
     setSectionHeight(`calc(100vh + ${totalScrollPx}px)`)
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: containerRef.current,
-        start: 'top top',
+        start: 'top 10%',
         end: `+=${totalScrollPx}`,
         pin: stickyRef.current,
-        scrub: 1,
+        scrub: 0.15,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -100,7 +100,7 @@ export default function Pipeline() {
           {/* Left: steps */}
           <div className="space-y-5">
             <div className="mb-8">
-              <p className="text-cyan font-mono text-base font-medium uppercase tracking-widest mb-3">How It Works</p>
+              <p className="text-cyan font-mono text-lg font-medium uppercase tracking-widest mb-3">How It Works</p>
               <h2 className="text-4xl font-black tracking-tight">The WhatsApp Pipeline</h2>
             </div>
             {pipelineSteps.map((s, i) => (
@@ -110,15 +110,15 @@ export default function Pipeline() {
                   i === activeStep ? 'opacity-100' : i < activeStep ? 'opacity-35' : 'opacity-15'
                 }`}
               >
-                <span className={`font-mono text-base font-bold w-8 shrink-0 mt-0.5 ${
+                <span className={`font-mono text-lg font-bold w-8 shrink-0 mt-0.5 ${
                   i === activeStep ? 'text-cyan' : 'text-muted'
                 }`}>{s.step}</span>
                 <div>
-                  <h3 className={`font-bold text-base mb-1 ${i === activeStep ? 'text-primary' : 'text-muted'}`}>
+                  <h3 className={`font-bold text-lg mb-1 ${i === activeStep ? 'text-primary' : 'text-muted'}`}>
                     {s.title}
                   </h3>
                   {i === activeStep && (
-                    <p className="text-muted text-sm leading-relaxed">{s.body}</p>
+                    <p className="text-muted text-base leading-relaxed">{s.body}</p>
                   )}
                 </div>
               </div>
@@ -126,11 +126,11 @@ export default function Pipeline() {
           </div>
 
           {/* Right: 3D phone */}
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center py-16">
             <div
               style={{
-                perspective: '1000px',
-                transform: `rotateY(${-5 + activeStep * 1.5}deg) rotateX(2deg)`,
+                perspective: '1200px',
+                transform: `rotateY(${-6 + activeStep * 1.5}deg) rotateX(2deg)`,
                 transition: 'transform 0.7s ease',
               }}
             >

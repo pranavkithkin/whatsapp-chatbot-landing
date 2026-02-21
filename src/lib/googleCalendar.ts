@@ -1,8 +1,8 @@
 import { google } from 'googleapis'
 
-const IST_OFFSET = '+05:30'
-const WORK_START_HOUR = 9  // 9:00 AM IST
-const WORK_END_HOUR = 18   // 6:00 PM IST
+const IST_OFFSET = '+04:00' // Gulf Standard Time (Dubai)
+const WORK_START_HOUR = 13 // 1:00 PM GST
+const WORK_END_HOUR = 17   // 5:00 PM GST (last slot starts at 4:30)
 const SLOT_DURATION_MIN = 30
 
 function getOAuth2Client() {
@@ -56,13 +56,11 @@ export async function getAvailableSlots(date: string): Promise<string[]> {
     })
   })
 
-  // Format as IST ISO strings
+  // Format as GST (Dubai UTC+4) ISO strings
   return available.map((slot) => {
-    const iso = slot.toISOString()
-    // Convert UTC to IST: add 5:30
-    const istDate = new Date(slot.getTime() + 5.5 * 60 * 60_000)
+    const gstDate = new Date(slot.getTime() + 4 * 60 * 60_000)
     const pad = (n: number) => String(n).padStart(2, '0')
-    return `${istDate.getUTCFullYear()}-${pad(istDate.getUTCMonth() + 1)}-${pad(istDate.getUTCDate())}T${pad(istDate.getUTCHours())}:${pad(istDate.getUTCMinutes())}:00${IST_OFFSET}`
+    return `${gstDate.getUTCFullYear()}-${pad(gstDate.getUTCMonth() + 1)}-${pad(gstDate.getUTCDate())}T${pad(gstDate.getUTCHours())}:${pad(gstDate.getUTCMinutes())}:00${IST_OFFSET}`
   })
 }
 
@@ -99,8 +97,8 @@ export async function createCalendarEvent(params: BookingParams): Promise<Bookin
     requestBody: {
       summary: `Discovery Call — ${params.name} (${params.company})`,
       description: 'Booked via SynopsLabs website',
-      start: { dateTime: params.slot, timeZone: 'Asia/Kolkata' },
-      end: { dateTime: end.toISOString(), timeZone: 'Asia/Kolkata' },
+      start: { dateTime: params.slot, timeZone: 'Asia/Dubai' },
+      end: { dateTime: end.toISOString(), timeZone: 'Asia/Dubai' },
       attendees: [
         { email: params.email, displayName: params.name },
         { email: 'sales@synopslabs.com', displayName: 'SynopsLabs Sales' },

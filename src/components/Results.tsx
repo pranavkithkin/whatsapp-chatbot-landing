@@ -28,8 +28,8 @@ export default function Results() {
             <p className="text-4xl lg:text-5xl font-black font-mono text-cyan mb-2">
               {inView ? <CountUp end={stat.value} suffix={stat.suffix} /> : `0${stat.suffix}`}
             </p>
-            <p className="text-primary font-semibold text-base mb-1">{stat.label}</p>
-            <p className="text-muted text-sm">{stat.sub}</p>
+            <p className="text-primary font-semibold text-lg mb-1">{stat.label}</p>
+            <p className="text-muted text-base">{stat.sub}</p>
           </motion.div>
         ))}
       </div>

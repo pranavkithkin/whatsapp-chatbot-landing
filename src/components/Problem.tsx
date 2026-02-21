@@ -33,7 +33,7 @@ export default function Problem() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-cyan font-mono text-base font-medium mb-3 uppercase tracking-widest">The Problem</p>
+          <p className="text-cyan font-mono text-lg font-medium mb-3 uppercase tracking-widest">The Problem</p>
           <h2 className="text-4xl lg:text-5xl font-black tracking-tight">
             Meta Ads Bring the Leads.
             <br />

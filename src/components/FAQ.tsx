@@ -36,7 +36,7 @@ export default function FAQ() {
     <section className="py-24 px-6">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-cyan font-mono text-base font-medium uppercase tracking-widest mb-3">FAQ</p>
+          <p className="text-cyan font-mono text-lg font-medium uppercase tracking-widest mb-3">FAQ</p>
           <h2 className="text-4xl font-black tracking-tight">Common Questions</h2>
         </div>
 
@@ -47,7 +47,7 @@ export default function FAQ() {
                 className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
                 onClick={() => setOpen(open === i ? null : i)}
               >
-                <span className="font-semibold text-base text-primary">{faq.q}</span>
+                <span className="font-semibold text-lg text-primary">{faq.q}</span>
                 <span className={`text-cyan shrink-0 transition-transform duration-300 ${open === i ? 'rotate-45' : ''}`}>
                   +
                 </span>
@@ -61,7 +61,7 @@ export default function FAQ() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="px-6 pb-5 text-muted text-base leading-relaxed">{faq.a}</p>
+                    <p className="px-6 pb-5 text-muted text-lg leading-relaxed">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
