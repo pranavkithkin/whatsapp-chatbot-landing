@@ -17,7 +17,7 @@ export default function Hero({ onBookCall }: Props) {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
 
-      {/* ── Static background effects ─────────────────────────────────────── */}
+      {/* ── Dot grid ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -25,18 +25,72 @@ export default function Hero({ onBookCall }: Props) {
           backgroundSize: '32px 32px',
         }}
       />
+
+      {/* ── Ambient glows ── */}
       <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-cyan/8 blur-[130px] pointer-events-none" />
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-cyan/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent pointer-events-none" />
 
-      {/* ── Two-column layout ─────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 grid lg:grid-cols-[55%_45%] gap-8 items-center py-20">
+      {/* ── Spline: absolute, right half of viewport, full height ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute hidden lg:block pointer-events-none"
+        style={{
+          top: 0,
+          right: 0,
+          width: '56%',
+          height: '100%',
+          zIndex: 1,
+        }}
+      >
+        {/*
+          Spline canvas is rendered oversized (120% × 120%) and nudged up so:
+          1. The 3D object fills and centers naturally within the right half
+          2. The "Built with Spline" badge (always bottom-right of canvas)
+             is pushed below the viewport and never visible
+        */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-10%',
+            left: '-10%',
+            width: '120%',
+            height: '120%',
+          }}
+        >
+          <Spline
+            scene={SPLINE_SCENE}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </div>
 
-        {/* LEFT: copy */}
+        {/* Edge fades — blend seamlessly into bg */}
+        <div className="absolute inset-y-0 left-0 w-56 pointer-events-none" style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }} />
+        <div className="absolute inset-y-0 right-0 w-32 pointer-events-none" style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }} />
+        <div className="absolute top-0 left-0 right-0 h-40 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none" style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }} />
+
+        {/* Kill the "Built with Spline" badge — covers bottom-right corner of canvas */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            bottom: 0,
+            right: 0,
+            width: '220px',
+            height: '60px',
+            background: '#080C14',
+          }}
+        />
+      </motion.div>
+
+      {/* ── Left: copy — sits above Spline via z-10 ── */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 lg:px-16 py-20">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-[600px]"
         >
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/25 bg-cyan/5 text-cyan text-[13px] font-mono font-medium mb-7 tracking-widest uppercase">
@@ -121,26 +175,8 @@ export default function Hero({ onBookCall }: Props) {
             <span className="text-sm text-muted">Go live in 2 weeks</span>
           </motion.div>
         </motion.div>
-
-        {/* RIGHT: Spline 3D scene */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative hidden lg:flex lg:items-center lg:justify-center overflow-hidden"
-          style={{ height: '680px' }}
-        >
-          <Spline
-            scene={SPLINE_SCENE}
-            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
-          />
-          <div className="absolute inset-y-0 left-0 w-32 pointer-events-none" style={{ background: 'linear-gradient(to right, #080C14 0%, transparent 100%)' }} />
-          <div className="absolute inset-y-0 right-0 w-24 pointer-events-none" style={{ background: 'linear-gradient(to left, #080C14 0%, transparent 100%)' }} />
-          <div className="absolute top-0 left-0 right-0 h-24 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #080C14 0%, transparent 100%)' }} />
-          <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to top, #080C14 0%, transparent 100%)' }} />
-        </motion.div>
-
       </div>
+
     </section>
   )
 }
