@@ -17,6 +17,9 @@ export default function Hero({ onBookCall }: Props) {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
 
+      {/* Force Spline canvas to be transparent */}
+      <style>{`canvas { background: transparent !important; }`}</style>
+
       {/* ── Dot grid ── */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -42,6 +45,7 @@ export default function Hero({ onBookCall }: Props) {
           width: '56%',
           height: '100%',
           zIndex: 1,
+          background: 'transparent',
         }}
       >
         {/*
@@ -57,11 +61,12 @@ export default function Hero({ onBookCall }: Props) {
             left: '-10%',
             width: '120%',
             height: '120%',
+            background: 'transparent',
           }}
         >
           <Spline
             scene={SPLINE_SCENE}
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', background: 'transparent' }}
           />
         </div>
 
